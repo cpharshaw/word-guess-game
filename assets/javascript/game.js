@@ -18,6 +18,15 @@ var alpha = "abcdefghijklmnopqrstuvwxyz";
 
 var randomWord = words[Math.floor(Math.random() * words.length)];
 
+var placeholder = [];
+
+randomWord.split("").forEach(function() {
+    placeholder.push("-");
+});
+
+
+console.log(placeholder.join(" "));
+
 var validKey;
 
 var wins = 0;
