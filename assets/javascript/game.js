@@ -1,31 +1,39 @@
 
 
 var words = [
-    "pizza",
-    "automobile",
-    "waxing",
-    "football",
-    "eagles",
+    "tulsi",
+    "madhura",
+    "sumitra",
+    "bhanu",
+    "karthik",
 
-    "party",
-    "states",
-    "random",
-    "maroon",
-    "yogurt"
+    "vishvesh",
+    "ashmika",
+    "priya",
+    "abhishek",
+    "sunny",
 ];
 
 var alpha = "abcdefghijklmnopqrstuvwxyz";
 
-var randomWord = words[Math.floor(Math.random() * words.length)];
+var randomWordFunc = function() {
+    return words[Math.floor(Math.random() * words.length)]
+};
+
+var randomWord = randomWordFunc();
+
+var randomWordArr = randomWord.split("");
+
+
 
 var placeholder = [];
 
 randomWord.split("").forEach(function() {
     placeholder.push("-");
+    placeholder.join(" ");
 });
 
-
-console.log(placeholder.join(" "));
+console.log(placeholder);
 
 var validKey;
 
@@ -48,10 +56,9 @@ var incorrectGuesses = [];
 
 
 
-console.log(randomWord);
+// console.log(randomWord);
 
 document.onkeyup = function(event) {
-
 
     // Determines which key was pressed.
     var key = event.key.toLowerCase();
@@ -70,7 +77,15 @@ document.onkeyup = function(event) {
             if (randomWord.indexOf(validKey) > -1) {
                 score++;
                 correctGuesses.push(validKey);
-                console.log("Correct: " + correctGuesses);
+
+
+                for (var i = 0; i < randomWordArr.length; i++) {
+                    if(randomWordArr[i] === validKey) {
+                        placeholder[i] = validKey;
+                    }
+                }
+
+                console.log("Correct: " + placeholder);
 
                 if (score === scoreToWin) {
                     alert("You win!");
