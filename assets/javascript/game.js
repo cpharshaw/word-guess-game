@@ -1,124 +1,158 @@
 
 
-var words = [
-    "tulsi",
-    "madhura",
-    "sumitra",
-    "bhanu",
-    "karthik",
 
-    "vishvesh",
-    "ashmika",
-    "priya",
-    "abhishek",
-    "sunny",
-];
+var hangmanGame = {
 
-var alpha = "abcdefghijklmnopqrstuvwxyz";
+    gameInProgress: false,
 
-var randomWordFunc = function() {
-    return words[Math.floor(Math.random() * words.length)]
-};
+    words: [
+        "tulsi",
+        "madhura",
+        "sumitra",
+        "bhanu",
+        "karthik",
 
-var randomWord = randomWordFunc();
+        "vishvesh",
+        "ashmika",
+        "priya",
+        "abhishek",
+        "sunny",
 
-var randomWordArr = randomWord.split("");
+        "paula",
+        "lauren",
+        "duchess"
+    ],
+
+    alpha: "abcdefghijklmnopqrstuvwxyz",
+
+    randomWord: "",
+    
+    scoreToWin: 0,
+    score: 0,
+    chances: 7,
+    wins: 0,
+    losses: 0,
+
+    lettersGuessed: [],
+    correctGuesses: [],
+    incorrectGuesses: [],
+    placeholder: [],
+
+
+    getRandomWord: function (wordArr) {
+
+        this.randomWord = wordArr[Math.floor((Math.random() * wordArr.length) + 1)];
+
+        var word = this.randomWord;
+        var list = this.placeholder;
+        var stw = this.scoreToWin;
+        var alphabet = this.alpha;
+        
+        for (var i = 0; i < alphabet.length; i++) {
+            if (word.indexOf(alphabet[i]) > -1) {
+                stw++;
+            }
+        }
+
+        this.randomWord.split("").forEach(function () {
+            list.push("-");
+            list.join(" ");
+        });
+
+        this.randomWord = word;
+        this.placeholder = list;
+        this.scoreToWin = stw;
+    },
 
 
 
-var placeholder = [];
 
-randomWord.split("").forEach(function() {
-    placeholder.push("-");
-    placeholder.join(" ");
-});
 
-console.log(placeholder);
+    validateKey: function (event) {
 
-var validKey;
+        var keyPressed = event.key.toLowerCase();
 
-var wins = 0;
-var losses = 0;
+        var validKey;
 
-var scoreToWin = 0;
-for (var i = 0; i < alpha.length; i++) {
-    if (randomWord.indexOf(alpha.split("")[i]) > -1) {
-        scoreToWin++;
+        if (this.alpha.indexOf(keyPressed) > -1) {
+            validKey = keyPressed;
+            this.checkForDupeLetter(validKey);
+        } else {
+            // return;
+        };
+        
+    },
+
+
+    checkForDupeLetter: function (validKey) {
+
+        if (this.lettersGuessed.indexOf(validKey) > -1) {
+            // nothing if letter guessed previously
+            console.log("dupe letter: " + validKey);
+        } else {
+            // store any guessed letter not previously guessed
+            this.lettersGuessed.push(validKey);
+            console.log("letters used so far: " + this.lettersGuessed);
+
+            // proceeds to see if letter exists in word and generate score
+            this.letterChecker(validKey);
+        }
+    },
+
+
+    letterChecker: function (validKey) {
+        if (this.randomWord.indexOf(validKey) > -1) {
+            this.score++;        
+
+            for (var i = 0; i < this.randomWord.length; i++) {
+                if(this.randomWord[i] === validKey) {
+                    this.placeholder[i] = validKey;
+                }
+            }
+
+            console.log();
+            alert("Correct guess: " + this.placeholder + ".  " + "Letters used so far: " + this.lettersGuessed);
+            
+            if (this.score === this.scoreToWin) {
+                alert("You win!");
+                this.wins++;
+                this.resetGame(this);
+            }
+
+        } else {
+            this.chances--;
+
+            this.incorrectGuesses.push(validKey);
+
+            alert("Wrong.  Letters guessed: " + this.lettersGuessed + ".  Guesses remaining: " + this.chances);
+
+            if (this.chances === 0) {
+                alert("You lose.  The word was '" + this.randomWord.toUpperCase() + "'");
+                this.losses++;
+                this.resetGame(this);
+            }
+        }
+
+    },
+
+    resetGame: function(gameObj) {
+        gameObj.score = 0;
+        gameObj.lettersGuessed = [];
+        gameObj.correctGuesses = [];
+        gameObj.incorrectGuesses = [];
+        gameObj.scoreToWin = 0;
+        gameObj.placeholder = []
+        gameObj.chances = 7,
+        gameObj.getRandomWord(obj.words);
+        console.log("reset performed");
     }
+
 }
 
-var score = 0;
-var chances = 7;
-
-var lettersGuessed = [];
-var correctGuesses = [];
-var incorrectGuesses = [];
-
-
-
-// console.log(randomWord);
+hangmanGame.getRandomWord(hangmanGame.words);
 
 document.onkeyup = function(event) {
 
-    // Determines which key was pressed.
-    var key = event.key.toLowerCase();
+   hangmanGame.validateKey(event);
 
-    if (alpha.indexOf(key) > -1) {
-        // stores key press if it was a letter
-        validKey = key;
-
-        if (lettersGuessed.indexOf(validKey) > -1) {
-            // nothing if letter guessed previously
-        } else {
-            // store any guessed letter
-            lettersGuessed.push(validKey);
-
-            // if letter exists in word
-            if (randomWord.indexOf(validKey) > -1) {
-                score++;
-                correctGuesses.push(validKey);
-
-
-                for (var i = 0; i < randomWordArr.length; i++) {
-                    if(randomWordArr[i] === validKey) {
-                        placeholder[i] = validKey;
-                    }
-                }
-
-                console.log("Correct: " + placeholder);
-
-                if (score === scoreToWin) {
-                    alert("You win!");
-                    wins++;
-                    return;
-                }         
-
-            // if letter is incorrect
-            } else {
-                chances--;
-                incorrectGuesses.push(validKey);
-                console.log("Letters already guessed: " + incorrectGuesses + ".  Guesses remaining: " + chances);
-
-                if (chances === 0) {
-                    alert("You lose.  The word was '" + randomWord.toUpperCase() + "'");
-                    losses++;
-                    return;
-                }   
-
-            }
-        }  
-
-
-
-
-
-        
-
-
-    }
-    // console.log(score);
-    // console.log(validKey);
-    // console.log(key);
-    // console.log(lettersGuessed);
-
-};
+}
