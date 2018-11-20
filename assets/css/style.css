@@ -1,0 +1,14 @@
+
+
+
+
+body {
+    background-image: url('../images/backgrounds/dust_scratches.png');
+    background-size: cover;
+    background-repeat: repeat;
+}
+
+
+.column {
+    background-color: red;
+}

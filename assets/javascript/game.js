@@ -1,9 +1,9 @@
+$(document).ready(function() {
+
 
 
 
 var hangmanGame = {
-
-    gameInProgress: false,
 
     words: [
         "tulsi",
@@ -43,25 +43,18 @@ var hangmanGame = {
 
         this.randomWord = wordArr[Math.floor((Math.random() * wordArr.length) + 1)];
 
-        var word = this.randomWord;
-        var list = this.placeholder;
-        var stw = this.scoreToWin;
-        var alphabet = this.alpha;
-        
-        for (var i = 0; i < alphabet.length; i++) {
-            if (word.indexOf(alphabet[i]) > -1) {
-                stw++;
+        for (var i = 0; i < hangmanGame.alpha.length; i++) {
+            if (hangmanGame.randomWord.indexOf(hangmanGame.alpha[i]) > -1) {
+                hangmanGame.scoreToWin++;
             }
         }
 
         this.randomWord.split("").forEach(function () {
-            list.push("-");
-            list.join(" ");
+            hangmanGame.placeholder.push("-");
+            hangmanGame.placeholder.join(" ");
         });
 
-        this.randomWord = word;
-        this.placeholder = list;
-        this.scoreToWin = stw;
+        $("#currentWord").text(this.placeholder.join(""));
     },
 
 
@@ -69,7 +62,6 @@ var hangmanGame = {
 
 
     validateKey: function (event) {
-
         var keyPressed = event.key.toLowerCase();
 
         var validKey;
@@ -77,10 +69,7 @@ var hangmanGame = {
         if (this.alpha.indexOf(keyPressed) > -1) {
             validKey = keyPressed;
             this.checkForDupeLetter(validKey);
-        } else {
-            // return;
-        };
-        
+        }         
     },
 
 
@@ -110,24 +99,26 @@ var hangmanGame = {
                 }
             }
 
-            console.log();
-            alert("Correct guess: " + this.placeholder + ".  " + "Letters used so far: " + this.lettersGuessed);
+            $("#currentWord").text(this.placeholder.join(""));
+
+           console.log("Correct guess: " + this.placeholder + ".  " + "Letters used so far: " + this.lettersGuessed);
             
             if (this.score === this.scoreToWin) {
-                alert("You win!");
+                console.log("You win!");
                 this.wins++;
                 this.resetGame(this);
             }
 
         } else {
             this.chances--;
+            $("#chances").text(this.chances);
 
             this.incorrectGuesses.push(validKey);
 
-            alert("Wrong.  Letters guessed: " + this.lettersGuessed + ".  Guesses remaining: " + this.chances);
+           console.log("Wrong.  Letters guessed: " + this.lettersGuessed + ".  Guesses remaining: " + this.chances);
 
             if (this.chances === 0) {
-                alert("You lose.  The word was '" + this.randomWord.toUpperCase() + "'");
+                console.log("You lose.  The word was '" + this.randomWord.toUpperCase() + "'");
                 this.losses++;
                 this.resetGame(this);
             }
@@ -135,15 +126,21 @@ var hangmanGame = {
 
     },
 
-    resetGame: function(gameObj) {
-        gameObj.score = 0;
-        gameObj.lettersGuessed = [];
-        gameObj.correctGuesses = [];
-        gameObj.incorrectGuesses = [];
-        gameObj.scoreToWin = 0;
-        gameObj.placeholder = []
-        gameObj.chances = 7,
-        gameObj.getRandomWord(obj.words);
+    resetGame: function(x) {
+        $("#wins").text(x.wins);
+        $("#losses").text(x.losses);
+
+        x.score = 0;
+        x.lettersGuessed = [];
+        x.correctGuesses = [];
+        x.incorrectGuesses = [];
+        x.scoreToWin = 0;
+        x.placeholder = []
+        x.chances = 7,
+
+
+        $("#chances").text(x.chances);
+        x.getRandomWord(x.words);
         console.log("reset performed");
     }
 
@@ -156,3 +153,6 @@ document.onkeyup = function(event) {
    hangmanGame.validateKey(event);
 
 }
+
+
+});
