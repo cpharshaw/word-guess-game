@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>test</title>
 
-    <script 
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     </script>
 
     <script src="./assets/javascript/game.js"></script>
-    
+
     <link href="./assets/css/reset.css" rel="stylesheet">
     <link href="./assets/css/style.css" rel="stylesheet">
 
-    
+    <link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive|Coming+Soon|Permanent+Marker|Vibur" rel="stylesheet">
+
+
     <!-- <link 
         rel="stylesheet" 
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
@@ -29,50 +31,77 @@
         crossorigin="anonymous"
     ></script> -->
 
-<!-- <script>
+    <!-- <script>
     var randomWord = words[Math.floor(Math.random() * words.length)].split("");
 </script> -->
 
 </head>
 
 <body>
-    
-    <div id="" class"">
-            <br>
-        <header id="" class=""> 
-            Name Guess Game
+
+    <div id="" class "">
+        <br>
+        <header id="" class="">
+            <!-- Name Guess Game -->
+            <img id="" class="" src="assets/images/logo.jpg">
         </header>
 
 
-        <main id="" class="">
+        <main id="" class="row">
+            <br>
+
+            <section id="stuff1" class="content">
                 <br>
-            <img id="" class="" src="assets/images/logo.jpg">
+                <h1 id="" class="">Press Any Key to Get Started!</h1>
+                <br>
+                <h1 id="word" class=""></h1>
+                <br>
+                <h2 id="" class="">Wins: </h2>
+                <h3 id="wins" class="">0</h3>
+                <br>
+                <h2 id="" class="">Losses: </h2>
+                <h3 id="losses" class="">0</h3>
+                <br>
 
-            <br>
-            <h1 id="" class="">Press Any Key to Get Started!</h1>
-            <br>
-            <h1 id="word" class=""></h1>
-            <br>
-            <h2 id="" class="">Wins: </h2>
-            <h3 id="wins" class="">0</h3>
-            <br>
-            <h2 id="" class="">Losses: </h2>
-            <h3 id="losses" class="">0</h3>
-            <br>            
-            <h2 id="" class="">Current Word</h2>
-            <h3 id="currentWord" class=""></h3>
-            <br>
-            <h2 id="" class="">Number of Chances Remaining</h2>
-            <h3 id="chances" class="">7</h3>
-            <br>
-            <h2>Letters Already Guessed</h2>
-            <h3 id="alreadyGuessed" class="">ABCDEF</h3>   
-            <br>     
-        </main>        
+                <br>
+                <h2 id="" class="">Number of Chances Remaining:</h2>
+                <h3 id="chances" class="">7</h3>
+                <br>
+                <h2>Letters Already Guessed:</h2>
+                <h3 id="alreadyGuessed" class="">-</h3>
+                <br>
 
+            </section>
+            <br>
+            <br>
+            <section id="stuff2" class="content">
+                <div id="container" class="">
+                    <h2 id="currentWordHeading" class="">Current Word:</h2>
+                    <br>
+                    <h3 id="currentWord" class=""></h3>
+                </div>
+            </section>
+        </main>
 
+        <br>
         <footer id="" class="">
         </footer>
+
+        <audio id="win">
+            <source src="../word-guess-game/assets/audio/Audience Clapping.mp3" type="audio/mp3">
+        </audio>
+
+        <audio id="correct">
+            <source src="../word-guess-game/assets/audio/correct.mp3" type="audio/mp3">
+        </audio>      
+        
+        <audio id="wrong">
+            <source src="../word-guess-game/assets/audio/punch.wav" type="audio/wav">
+        </audio>        
+        
+        <audio id="lose">
+            <source src="../word-guess-game/assets/audio/lose.mp3" type="audio/mp3">
+        </audio>           
 
     </div>
 
@@ -81,4 +110,5 @@
 
 
 </body>
+
 </html>

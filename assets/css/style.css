@@ -1,14 +1,68 @@
 
-
-
-
-body {
-    background-image: url('../images/backgrounds/dust_scratches.png');
-    background-size: cover;
-    background-repeat: repeat;
+* {
+    font-family: 'Permanent Marker', cursive; 
+    font-size: 21px;
 }
 
 
-.column {
-    background-color: red;
+body {
+    background-image: url('../images/backgrounds/cheap_diagonal_fabric.png');
+}
+
+img {
+    height: 250px;
+    width: auto;
+}
+
+#stuff1 {
+    background-image: url('../images/backgrounds/yellow-lined-paper.png'); 
+    width: 350px;
+    height: 425px;  
+
+    box-shadow: 10px 5px 10px #888888;    
+}
+
+#stuff2 {
+    background-image: url('../images/backgrounds/corkboard.jpg');   
+    width: 350px;
+    height: 425px;  
+    border: 0px solid #888888;
+    box-shadow: 10px 5px 10px #888888;
+}
+
+
+.row {
+    flex-direction: row;
+}
+
+.content {
+    /* padding: 0 25px 0 25px; */
+    margin: 15px 25px 0 25px;
+}
+
+#currentWordHeading {
+    font-weight: bold;
+    font-family: 'Coming Soon', cursive;
+}
+
+
+#container {
+    background-image: url('../images/backgrounds/lined_paper_@2X.png');  
+    height: 200px;
+    width: 200px; 
+    /* background-color: yellow; */
+}
+
+
+/* 
+font-family: 'Coming Soon', cursive;
+font-family: 'Cedarville Cursive', cursive;
+font-family: 'Vibur', cursive;
+font-family: 'Permanent Marker', cursive; 
+*/
+
+@media only screen and (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
 }

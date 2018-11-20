@@ -41,7 +41,7 @@ var hangmanGame = {
 
     getRandomWord: function (wordArr) {
 
-        this.randomWord = wordArr[Math.floor((Math.random() * wordArr.length) + 1)];
+        this.randomWord = wordArr[Math.floor(Math.random() * wordArr.length)];
 
         for (var i = 0; i < hangmanGame.alpha.length; i++) {
             if (hangmanGame.randomWord.indexOf(hangmanGame.alpha[i]) > -1) {
@@ -81,6 +81,7 @@ var hangmanGame = {
         } else {
             // store any guessed letter not previously guessed
             this.lettersGuessed.push(validKey);
+            $("#alreadyGuessed").text(this.lettersGuessed.join("").toUpperCase().split(""));
             console.log("letters used so far: " + this.lettersGuessed);
 
             // proceeds to see if letter exists in word and generate score
@@ -91,7 +92,9 @@ var hangmanGame = {
 
     letterChecker: function (validKey) {
         if (this.randomWord.indexOf(validKey) > -1) {
-            this.score++;        
+            this.score++;
+            
+            
 
             for (var i = 0; i < this.randomWord.length; i++) {
                 if(this.randomWord[i] === validKey) {
@@ -104,10 +107,23 @@ var hangmanGame = {
            console.log("Correct guess: " + this.placeholder + ".  " + "Letters used so far: " + this.lettersGuessed);
             
             if (this.score === this.scoreToWin) {
+                $("#wrong")[0].pause();
+                $("#correct")[0].pause();
+                $("#wrong")[0].currentTime = 0;
+                $("#correct")[0].currentTime = 0;
+                $("#win")[0].play();
                 console.log("You win!");
                 this.wins++;
                 this.resetGame(this);
+            } else {
+                $("#wrong")[0].pause();
+                $("#correct")[0].pause();
+                $("#wrong")[0].currentTime = 0;
+                $("#correct")[0].currentTime = 0;
+                $("#correct")[0].play();
             }
+
+           
 
         } else {
             this.chances--;
@@ -118,10 +134,23 @@ var hangmanGame = {
            console.log("Wrong.  Letters guessed: " + this.lettersGuessed + ".  Guesses remaining: " + this.chances);
 
             if (this.chances === 0) {
+                $("#wrong")[0].pause();
+                $("#correct")[0].pause();
+                $("#wrong")[0].currentTime = 0;
+                $("#correct")[0].currentTime = 0;         
+                $("#lose")[0].play();
                 console.log("You lose.  The word was '" + this.randomWord.toUpperCase() + "'");
                 this.losses++;
                 this.resetGame(this);
+            } else {
+                $("#wrong")[0].pause();
+                $("#correct")[0].pause();
+                $("#wrong")[0].currentTime = 0;
+                $("#correct")[0].currentTime = 0;
+                $("#wrong")[0].play();
             }
+
+           
         }
 
     },
@@ -140,6 +169,7 @@ var hangmanGame = {
 
 
         $("#chances").text(x.chances);
+        $("#alreadyGuessed").text(x.randomWord.toUpperCase() + " was the name.");
         x.getRandomWord(x.words);
         console.log("reset performed");
     }
