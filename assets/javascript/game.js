@@ -6,21 +6,37 @@ $(document).ready(function() {
 var hangmanGame = {
 
     words: [
-        "tulsi",
-        "madhura",
-        "sumitra",
-        "bhanu",
-        "karthik",
+        "michael",
+        "peter",
+        "joanna",
+        "milton",
+        "lumbergh",
 
-        "vishvesh",
-        "ashmika",
-        "priya",
-        "abhishek",
-        "sunny",
+        "samir",
+        "lawrence",
+        "slydell",
+        "smykowski",
+        "drew",
 
-        "paula",
-        "lauren",
-        "duchess"
+        "porter",
+        "anne",
+        "stan"
+        
+//         "tulsi",
+//         "madhura",
+//         "sumitra",
+//         "bhanu",
+//         "karthik",
+
+//         "vishvesh",
+//         "ashmika",
+//         "priya",
+//         "abhishek",
+//         "sunny",
+
+//         "paula",
+//         "lauren",
+//         "duchess"        
     ],
 
     alpha: "abcdefghijklmnopqrstuvwxyz",
