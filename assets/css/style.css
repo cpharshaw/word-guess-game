@@ -4,6 +4,11 @@ h1,h2,h3,h4,h5,h6,div,section,header {
     font-size: 21px;
 }
 
+html, body {
+    height: 100%;
+    width: 100%;   
+}
+
 
 body {
     background-image: url('../images/backgrounds/cheap_diagonal_fabric.png');
