@@ -84,7 +84,7 @@ html {
 		"Segoe UI Symbol";
 }
 
-*:not(title) {
+div, a, p, span, img, footer, main, header, section, h1, h2, h3, h4, h5, h6, br {
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
